@@ -47,7 +47,7 @@ open internal class SGVADrawer(val videoItem: SVGAVideoEntity) {
     }
 
     open fun drawFrame(canvas : Canvas, frameIndex: Int, scaleType: ImageView.ScaleType) {
-        scaleInfo.performScaleType(canvas.width.toFloat(),canvas.height.toFloat(), videoItem.videoSize.width.toFloat(), videoItem.videoSize.height.toFloat(), scaleType)
+        scaleInfo.performScaleType(canvas.clipBounds.width().toFloat(),canvas.clipBounds.height().toFloat(), videoItem.videoSize.width.toFloat(), videoItem.videoSize.height.toFloat(), scaleType)
     }
 
 }

@@ -63,7 +63,7 @@ internal class SVGACanvasDrawer(videoItem: SVGAVideoEntity, val dynamicItem: SVG
             /// Is matte begin
             if (isMatteBegin(index, sprites)) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    saveID = canvas.saveLayer(0f, 0f, canvas.width.toFloat(), canvas.height.toFloat(), null)
+                    saveID = canvas.saveLayer(0f, 0f, canvas.clipBounds.width().toFloat(), canvas.clipBounds.height().toFloat(), null)
                 } else {
                     canvas.save()
                 }
@@ -74,7 +74,7 @@ internal class SVGACanvasDrawer(videoItem: SVGAVideoEntity, val dynamicItem: SVG
             /// Is matte end
             if (isMatteEnd(index, sprites)) {
                 matteSprites.get(svgaDrawerSprite.matteKey)?.let {
-                    drawSprite(it, this.sharedValues.shareMatteCanvas(canvas.width, canvas.height), frameIndex)
+                    drawSprite(it, this.sharedValues.shareMatteCanvas(canvas.clipBounds.width(), canvas.clipBounds.height()), frameIndex)
                     canvas.drawBitmap(this.sharedValues.sharedMatteBitmap(), 0f, 0f, this.sharedValues.shareMattePaint())
                     if (saveID != -1) {
                         canvas.restoreToCount(saveID)
@@ -538,11 +538,11 @@ internal class SVGACanvasDrawer(videoItem: SVGAVideoEntity, val dynamicItem: SVG
         private val cache = HashMap<SVGAVideoShapeEntity, Path>()
 
         fun onSizeChanged(canvas: Canvas) {
-            if (this.canvasWidth != canvas.width || this.canvasHeight != canvas.height) {
+            if (this.canvasWidth != canvas.clipBounds.width() || this.canvasHeight != canvas.clipBounds.height()) {
                 this.cache.clear()
             }
-            this.canvasWidth = canvas.width
-            this.canvasHeight = canvas.height
+            this.canvasWidth = canvas.clipBounds.width()
+            this.canvasHeight = canvas.clipBounds.height()
         }
 
         fun buildPath(shape: SVGAVideoShapeEntity): Path {
