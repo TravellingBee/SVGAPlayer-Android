@@ -12,7 +12,7 @@ class SVGADrawable(val videoItem: SVGAVideoEntity, val dynamicItem: SVGADynamicE
     constructor(videoItem: SVGAVideoEntity): this(videoItem, SVGADynamicEntity())
 
     var cleared = true
-        internal set (value) {
+        set(value) {
             if (field == value) {
                 return
             }
@@ -21,7 +21,7 @@ class SVGADrawable(val videoItem: SVGAVideoEntity, val dynamicItem: SVGADynamicE
         }
 
     var currentFrame = 0
-        internal set (value) {
+        set(value) {
             if (field == value) {
                 return
             }
