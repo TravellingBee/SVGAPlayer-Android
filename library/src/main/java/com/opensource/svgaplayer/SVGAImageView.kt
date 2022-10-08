@@ -50,7 +50,7 @@ open class SVGAImageView @JvmOverloads constructor(
     private var mAnimator: ValueAnimator? = null
     private var mItemClickAreaListener: SVGAClickAreaListener? = null
     private var mAntiAlias = true
-    private var mAutoPlay = true
+    var mAutoPlay = true
     private val mAnimatorListener = AnimatorListener(this)
     private val mAnimatorUpdateListener = AnimatorUpdateListener(this)
     private var mStartFrame = 0
