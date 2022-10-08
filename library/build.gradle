@@ -35,3 +35,18 @@ android {
 dependencies {
     implementation 'com.squareup.wire:wire-runtime:4.4.1'
 }
+
+// 发布maven配置
+apply plugin: 'maven'
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.groupId = 'com.leon'
+            pom.artifactId = "SVGAPlayer"
+            pom.version = "2.6.1"
+            pom.packaging = 'aar'
+            repository(url:
+                    uri("${rootProject.projectDir.parentFile}/repo"))
+        }
+    }
+}
